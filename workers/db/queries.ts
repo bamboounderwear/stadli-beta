@@ -16,8 +16,12 @@ export const Q = {
 export type Row<T> = T & Record<string, unknown>;
 
 export async function settingsMap(db: D1Database): Promise<Record<string,string>> {
-  const rs = await db.prepare(Q.getSettings).all<Row<Setting>>();
-  const map: Record<string,string> = {};
-  for (const r of rs.results ?? []) map[r.key] = r.value;
-  return map;
+  try {
+    const rs = await db.prepare(Q.getSettings).all<Row<Setting>>();
+    const map: Record<string,string> = {};
+    for (const r of rs.results ?? []) map[r.key] = r.value;
+    return map;
+  } catch {
+    return {};
+  }
 }
