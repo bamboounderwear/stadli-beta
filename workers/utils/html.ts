@@ -18,6 +18,8 @@ export function layout(opts: {
   const flash = opts.flash ? `<div class="alert">${esc(opts.flash)}</div>` : "";
   const primary = opts.settings?.primary_color ?? "#0b5fff";
   const secondary = opts.settings?.secondary_color ?? "#111827";
+  const logoKey = opts.settings?.logo_key?.trim();
+  const logoSrc = logoKey ? `/media/${esc(logoKey)}` : "/assets/logo.svg";
   return html(`
 <!doctype html>
 <html lang="en">
@@ -33,7 +35,7 @@ export function layout(opts: {
   <body>
     <header class="header">
       <div class="container" style="display:flex;align-items:center;gap:1rem;">
-        <img src="/assets/logo.svg" alt="logo" width="40" height="40"/>
+        <img src="${logoSrc}" alt="logo" width="40" height="40"/>
         <div style="flex:1 1 auto; font-weight:600">${esc(opts.siteName ?? "Team")}</div>
         <nav style="display:flex; gap:.8rem;">
           <a href="/">Home</a>
