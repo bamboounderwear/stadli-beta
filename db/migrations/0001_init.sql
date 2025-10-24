@@ -59,7 +59,7 @@ INSERT OR IGNORE INTO users (email, password_hash, salt, role) VALUES (
 
 -- Seed homepage content
 INSERT OR IGNORE INTO content (slug, title, body, published) VALUES
-('home', 'Welcome to The Team', '<p>Game on! This is your new site.</p>', 1);
+('home', 'Welcome to The Team', '<p>Game on! This is your new site.</p><p>Use the admin area to publish posts, highlight sponsors, and customize the homepage hero to match your brand.</p>', 1);
 
 -- Default settings
 INSERT OR IGNORE INTO settings (key, value) VALUES
