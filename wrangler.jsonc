@@ -1,50 +1,39 @@
 {
-  // Replace placeholders then deploy.
   "name": "team-cms-crm",
   "main": "workers/index.ts",
   "compatibility_date": "2025-03-07",
-  "compatibility_flags": ["nodejs_compat"],
-  "observability": { "enabled": true, "head_sampling_rate": 1 },
-
-  // Serve files from /ui/public at /assets/*
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
   "assets": {
     "binding": "ASSETS",
     "directory": "ui/public"
   },
-
-  // Environment variables (replace these)
   "vars": {
-    "SESSION_SECRET": "REPLACE_WITH_RANDOM_BASE64",
+    "SESSION_SECRET": "b250b3NvbGlkcm93ZGlkY29tcGxldGV3YWdvbnByaXZhdGVzdGFuZGFyZGVmZm9ydGM=",
     "SITE_NAME": "Your Team Name",
-    "BASE_URL": "https://<your-domain.example.com>"
+    "BASE_URL": "https://team-cms-crm.<your-account>.workers.dev"
   },
-
-  // D1 binding (replace database_id)
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "teamdb",
-      "database_id": "<D1_DATABASE_ID>"
+      "database_id": "70100899-1670-47a1-adc4-1b54d8d74ece"
     }
   ],
-
-  // R2 binding (replace bucket name)
   "r2_buckets": [
     {
       "binding": "MEDIA_BUCKET",
-      "bucket_name": "<R2_BUCKET_NAME>"
+      "bucket_name": "stadli"
     }
   ],
-
-  // HTTP route (set your custom domain here)
-  "routes": [
-    { "pattern": "<your-domain.example.com>", "custom_domain": true }
-  ],
-
   "triggers": {
     "crons": []
   },
-
   "dev": {
     "port": 8787
   }
