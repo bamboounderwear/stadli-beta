@@ -1,0 +1,51 @@
+{
+  // Replace placeholders then deploy.
+  "name": "team-cms-crm",
+  "main": "workers/index.ts",
+  "compatibility_date": "2025-03-07",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+
+  // Serve files from /ui/public at /assets/*
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "ui/public"
+  },
+
+  // Environment variables (replace these)
+  "vars": {
+    "SESSION_SECRET": "REPLACE_WITH_RANDOM_BASE64",
+    "SITE_NAME": "Your Team Name",
+    "BASE_URL": "https://<your-domain.example.com>"
+  },
+
+  // D1 binding (replace database_id)
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "teamdb",
+      "database_id": "<D1_DATABASE_ID>"
+    }
+  ],
+
+  // R2 binding (replace bucket name)
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "<R2_BUCKET_NAME>"
+    }
+  ],
+
+  // HTTP route (set your custom domain here)
+  "routes": [
+    { "pattern": "<your-domain.example.com>", "custom_domain": true }
+  ],
+
+  "triggers": {
+    "crons": []
+  },
+
+  "dev": {
+    "port": 8787
+  }
+}

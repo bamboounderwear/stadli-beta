@@ -1,0 +1,19 @@
+:root {
+  --primary: #0b5fff;
+  --secondary: #111827;
+  --bg: #ffffff;
+  --text: #111827;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji'; background: var(--bg); color: var(--text); }
+a { color: var(--primary); text-decoration: none; }
+.header, .footer { background: var(--secondary); color: white; padding: 1rem; }
+.container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+.card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+.btn { display: inline-block; padding: .6rem 1rem; border-radius: 10px; border: 1px solid #d1d5db; }
+.btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border-bottom: 1px solid #e5e7eb; padding: .5rem; text-align: left; }
+.form-group { margin-bottom: .8rem; }
+input, select, textarea { width: 100%; padding: .6rem; border: 1px solid #d1d5db; border-radius: 8px; }
+.alert { padding: .6rem .8rem; border-radius: 10px; background: #f3f4f6; border: 1px solid #e5e7eb; }
