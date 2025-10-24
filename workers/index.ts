@@ -1,3 +1,4 @@
+// workers/index.ts
 import type { Env, User } from "./types";
 import { html, layout, redirect, parseFlash } from "./utils/html";
 import { getUserFromRequest, createSessionCookie, clearSessionCookie, sha256Hex } from "./utils/auth";
@@ -8,49 +9,61 @@ import { mockFeatureB } from "./api/mock-feature-b";
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const url = new URL(request.url);
     try {
-      const url = new URL(request.url);
       const user = await getUserFromRequest(env, request);
 
-      // Serve static assets under /assets/*
       if (url.pathname.startsWith("/assets/")) {
         const path = url.pathname.replace(/^\/assets\//, "");
-        return env.ASSETS.fetch(new Request(new URL(path, request.url), request));
+        const assetUrl = new URL(path, request.url);
+        return env.ASSETS.fetch(new Request(assetUrl, request));
       }
 
-      // Public endpoints
-      if (url.pathname === "/health") return new Response("ok", { headers: secHeaders() });
-      if (url.pathname === "/" && request.method === "GET") return FanRoutes.home(env, user);
+      if (url.pathname === "/health") {
+        return new Response("ok", { headers: secHeaders() });
+      }
 
-      // Media (public GET)
+      if (url.pathname === "/" && request.method === "GET") {
+        return FanRoutes.home(env, user);
+      }
+
       if (url.pathname.startsWith("/media/") && request.method === "GET") {
         const key = url.pathname.replace(/^\/media\//, "");
         const obj = await env.MEDIA_BUCKET.get(key);
-        if (!obj) return new Response("Not found", { status: 404 });
-        return new Response(obj.body, { headers: { "content-type": obj.httpMetadata?.contentType || "application/octet-stream", ...secHeaders() } });
+        if (!obj) return new Response("Not found", { status: 404, headers: secHeaders() });
+        return new Response(obj.body, {
+          headers: {
+            "content-type": obj.httpMetadata?.contentType || "application/octet-stream",
+            ...secHeaders()
+          }
+        });
       }
 
-      // Auth routes
       if (url.pathname === "/login") {
         if (request.method === "GET") {
+          const body = (await import("./admin/templates")).AdminViews.login();
           return layout({
             title: "Login",
             siteName: env.SITE_NAME,
             user,
             flash: parseFlash(request),
-            body: (await import("./admin/templates")).AdminViews.login()
+            body
           });
         }
         if (request.method === "POST") {
           const fd = await request.formData();
           const email = String(fd.get("email") ?? "").trim().toLowerCase();
           const password = String(fd.get("password") ?? "");
-          const row = await env.DB.prepare("SELECT * FROM users WHERE email = ?").bind(email).first<any>();
-          if (!row) return redirect("/login", "Invalid credentials");
-          const hash = await sha256Hex(password + row.salt);
-          if (hash !== row.password_hash) return redirect("/login", "Invalid credentials");
-          const cookie = await createSessionCookie(row.id, env.SESSION_SECRET, 12);
-          return new Response(null, { status: 302, headers: { location: "/admin", "set-cookie": cookie, ...secHeaders() } });
+          try {
+            const row = await env.DB.prepare("SELECT * FROM users WHERE email = ?").bind(email).first<any>();
+            if (!row) return redirect("/login", "Invalid credentials");
+            const hash = await sha256Hex(password + row.salt);
+            if (hash !== row.password_hash) return redirect("/login", "Invalid credentials");
+            const cookie = await createSessionCookie(row.id, env.SESSION_SECRET, 12);
+            return new Response(null, { status: 302, headers: { location: "/admin", "set-cookie": cookie, ...secHeaders() } });
+          } catch {
+            return redirect("/login", "Auth unavailable. Run D1 migrations.");
+          }
         }
       }
 
@@ -58,7 +71,6 @@ export default {
         return new Response(null, { status: 302, headers: { location: "/", "set-cookie": clearSessionCookie(), ...secHeaders() } });
       }
 
-      // Admin protected routes
       if (url.pathname === "/admin" && request.method === "GET") return AdminRoutes.dashboard(env, user);
       if (url.pathname === "/admin/fans" && request.method === "GET") return AdminRoutes.fansList(env, user);
       if (url.pathname === "/admin/fans" && request.method === "POST") return AdminRoutes.fansCreate(env, user, request);
@@ -69,14 +81,15 @@ export default {
       if (url.pathname === "/admin/media" && request.method === "GET") return AdminRoutes.media(env, user);
       if (url.pathname === "/admin/media" && request.method === "POST") return AdminRoutes.mediaUpload(env, user, request);
 
-      // API scaffold
       if (url.pathname === "/api/mock-a") return mockFeatureA(env, request);
       if (url.pathname === "/api/mock-b") return mockFeatureB(env, request);
 
       return notFound();
-    } catch (err: any) {
+    } catch (err: unknown) {
+      if (err instanceof Response) return err;
       console.error("Error", err);
-      return html(`<h1>Server Error</h1><p>${escapeHtml(String(err?.message || err))}</p>`, 500);
+      const msg = err && typeof err === "object" && "message" in err ? String((err as any).message) : String(err);
+      return html(`<h1>Server Error</h1><p>${escapeHtml(msg)}</p>`, 500);
     }
   }
 } satisfies ExportedHandler<Env>;
@@ -86,12 +99,12 @@ function notFound(): Response {
 }
 
 function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, (c) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[c] as string));
+  return s.replace(/[&<>"']/g, (c) => (
+    { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" } as Record<string, string>
+  )[c]);
 }
 
-function secHeaders(): Record<string,string> {
+function secHeaders(): Record<string, string> {
   return {
     "x-content-type-options": "nosniff",
     "x-frame-options": "DENY",
