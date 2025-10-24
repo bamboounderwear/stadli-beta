@@ -41,3 +41,26 @@ export type Media = {
   size: number | null;
   uploaded_at: string;
 };
+
+export type Post = {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt?: string | null;
+  body: string;
+  published: number;
+  published_at?: string | null;
+  created_at: string;
+  updated_at?: string | null;
+};
+
+export type Sponsor = {
+  id: number;
+  name: string;
+  logo_key?: string | null;
+  website_url?: string | null;
+  sort_order: number;
+  published: number;
+  created_at: string;
+  updated_at?: string | null;
+};
