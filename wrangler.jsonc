@@ -16,7 +16,7 @@
   "vars": {
     "SESSION_SECRET": "b250b3NvbGlkcm93ZGlkY29tcGxldGV3YWdvbnByaXZhdGVzdGFuZGFyZGVmZm9ydGM=",
     "SITE_NAME": "Your Team Name",
-    "BASE_URL": "https://team-cms-crm.<your-account>.workers.dev"
+    "BASE_URL": "https://stadli-beta.marcoux.workers.dev"
   },
   "d1_databases": [
     {
