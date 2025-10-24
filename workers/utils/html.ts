@@ -25,7 +25,7 @@ export function layout(opts: {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${title}</title>
-    <link rel="stylesheet" href="/assets/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <style>
       :root { --primary: ${primary}; --secondary: ${secondary}; }
     </style>
@@ -33,7 +33,7 @@ export function layout(opts: {
   <body>
     <header class="header">
       <div class="container" style="display:flex;align-items:center;gap:1rem;">
-        <img src="/assets/assets/logo.svg" alt="logo" width="40" height="40"/>
+        <img src="/assets/logo.svg" alt="logo" width="40" height="40"/>
         <div style="flex:1 1 auto; font-weight:600">${esc(opts.siteName ?? "Team")}</div>
         <nav style="display:flex; gap:.8rem;">
           <a href="/">Home</a>
