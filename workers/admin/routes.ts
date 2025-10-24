@@ -1,4 +1,4 @@
-import type { Env, User } from "../types";
+import type { Env, Media, User } from "../types";
 import { layout, redirect } from "../utils/html";
 import { AdminViews } from "./templates";
 import { settingsMap } from "../db/queries";
@@ -66,7 +66,15 @@ export const AdminRoutes = {
   async settings(env: Env, user: User | null): Promise<Response> {
     const me = await requireUser(env, user);
     const settings = await settingsMap(env.DB);
-    return layout({ title: "Settings", siteName: env.SITE_NAME, user: me, settings, body: AdminViews.settings({ settings }) });
+    const mediaRs = await env.DB.prepare("SELECT * FROM media ORDER BY uploaded_at DESC LIMIT 100").all();
+    const media = (mediaRs.results as Media[] | undefined) ?? [];
+    return layout({
+      title: "Settings",
+      siteName: env.SITE_NAME,
+      user: me,
+      settings,
+      body: AdminViews.settings({ settings, media })
+    });
   },
 
   async settingsSave(env: Env, user: User | null, req: Request): Promise<Response> {
@@ -74,9 +82,17 @@ export const AdminRoutes = {
     const fd = await req.formData();
     const primary = String(fd.get("primary_color") ?? "#0b5fff");
     const secondary = String(fd.get("secondary_color") ?? "#111827");
+    const logoKey = String(fd.get("logo_key") ?? "").trim();
+    if (logoKey) {
+      const exists = await env.DB.prepare("SELECT 1 FROM media WHERE key = ?").bind(logoKey).first();
+      if (!exists) {
+        return redirect("/admin/settings", "Logo not found. Upload in Media first.");
+      }
+    }
     await env.DB.batch([
       env.DB.prepare("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind("primary_color", primary),
-      env.DB.prepare("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind("secondary_color", secondary)
+      env.DB.prepare("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind("secondary_color", secondary),
+      env.DB.prepare("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind("logo_key", logoKey)
     ]);
     return redirect("/admin/settings", "Settings saved");
   },
@@ -85,7 +101,7 @@ export const AdminRoutes = {
     const me = await requireUser(env, user);
     const rs = await env.DB.prepare("SELECT * FROM media ORDER BY uploaded_at DESC LIMIT 100").all();
     const settings = await settingsMap(env.DB);
-    return layout({ title: "Media", siteName: env.SITE_NAME, user: me, settings, body: AdminViews.media({ media: (rs.results as any[]) ?? [] }) });
+    return layout({ title: "Media", siteName: env.SITE_NAME, user: me, settings, body: AdminViews.media({ media: (rs.results as Media[] | undefined) ?? [] }) });
   },
 
   async mediaUpload(env: Env, user: User | null, req: Request): Promise<Response> {

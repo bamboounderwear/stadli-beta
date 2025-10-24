@@ -1,4 +1,13 @@
-import type { Content, Fan, User } from "../types";
+import type { Content, Fan, Media, User } from "../types";
+
+const esc = (s: string) =>
+  s.replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  }[c] as string));
 
 export const AdminViews = {
   dashboard({ user, counts }: { user: User; counts: { fans: number; content: number; media: number } }) {
@@ -74,18 +83,39 @@ export const AdminViews = {
     `;
   },
 
-  settings({ settings }: { settings: Record<string,string> }) {
+  settings({ settings, media }: { settings: Record<string,string>; media: Media[] }) {
+    const primary = settings.primary_color ?? "#0b5fff";
+    const secondary = settings.secondary_color ?? "#111827";
+    const logoKey = settings.logo_key ?? "";
+    const logoOptions = media
+      .map((m) => {
+        const selected = logoKey === m.key ? " selected" : "";
+        return `<option value="${esc(m.key)}"${selected}>${esc(m.filename)}</option>`;
+      })
+      .join("");
+    const logoPreview = logoKey
+      ? `<div style="margin-top:1rem;"><strong>Current Logo Preview</strong><div class="card" style="max-width:200px;"><img src="/media/${esc(logoKey)}" alt="Team logo" style="width:100%;height:auto;"/></div></div>`
+      : "";
     return `
       <h1>Settings</h1>
       <form method="post" action="/admin/settings" class="card" style="max-width:520px;">
-        <div class="form-group"><label>Primary Color</label><input name="primary_color" value="${settings.primary_color ?? "#0b5fff"}"></div>
-        <div class="form-group"><label>Secondary Color</label><input name="secondary_color" value="${settings.secondary_color ?? "#111827"}"></div>
+        <div class="form-group"><label>Primary Color</label><input name="primary_color" value="${esc(primary)}"></div>
+        <div class="form-group"><label>Secondary Color</label><input name="secondary_color" value="${esc(secondary)}"></div>
+        <div class="form-group">
+          <label>Logo</label>
+          <select name="logo_key">
+            <option value=""${logoKey ? "" : " selected"}>Default</option>
+            ${logoOptions}
+          </select>
+          <div class="hint">Upload logos in <a href="/admin/media">Media</a> then select one here.</div>
+        </div>
         <button class="btn btn-primary" type="submit">Save</button>
       </form>
+      ${logoPreview}
     `;
   },
 
-  media({ media }: { media: Array<{id:number,key:string,filename:string,content_type:string|null,size:number|null,uploaded_at:string}> }) {
+  media({ media }: { media: Media[] }) {
     const rows = media.map(m => `<tr><td>${m.id}</td><td><a href="/media/${m.key}" target="_blank">${m.filename}</a></td><td>${m.size ?? ""}</td><td>${m.uploaded_at}</td></tr>`).join("");
     return `
       <h1>Media</h1>

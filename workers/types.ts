@@ -32,3 +32,12 @@ export type Content = {
 };
 
 export type Setting = { key: string; value: string; };
+
+export type Media = {
+  id: number;
+  key: string;
+  filename: string;
+  content_type: string | null;
+  size: number | null;
+  uploaded_at: string;
+};
