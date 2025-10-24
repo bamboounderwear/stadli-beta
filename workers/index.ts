@@ -16,7 +16,7 @@ export default {
 
       // Static assets served by Assets binding (files in ui/public/*)
       if (url.pathname.startsWith("/assets/")) {
-        return env.ASSETS.fetch(request);
+        return await env.ASSETS.fetch(request);
       }
 
       // Health
@@ -26,7 +26,7 @@ export default {
 
       // Public home
       if (url.pathname === "/" && request.method === "GET") {
-        return FanRoutes.home(env, user);
+        return await FanRoutes.home(env, user);
       }
 
       // Public media proxy (R2)
@@ -83,19 +83,19 @@ export default {
       }
 
       // Admin (protected)
-      if (url.pathname === "/admin" && request.method === "GET") return AdminRoutes.dashboard(env, user);
-      if (url.pathname === "/admin/fans" && request.method === "GET") return AdminRoutes.fansList(env, user);
-      if (url.pathname === "/admin/fans" && request.method === "POST") return AdminRoutes.fansCreate(env, user, request);
-      if (url.pathname === "/admin/content" && request.method === "GET") return AdminRoutes.contentList(env, user);
-      if (url.pathname === "/admin/content" && request.method === "POST") return AdminRoutes.contentCreate(env, user, request);
-      if (url.pathname === "/admin/settings" && request.method === "GET") return AdminRoutes.settings(env, user);
-      if (url.pathname === "/admin/settings" && request.method === "POST") return AdminRoutes.settingsSave(env, user, request);
-      if (url.pathname === "/admin/media" && request.method === "GET") return AdminRoutes.media(env, user);
-      if (url.pathname === "/admin/media" && request.method === "POST") return AdminRoutes.mediaUpload(env, user, request);
+      if (url.pathname === "/admin" && request.method === "GET") return await AdminRoutes.dashboard(env, user);
+      if (url.pathname === "/admin/fans" && request.method === "GET") return await AdminRoutes.fansList(env, user);
+      if (url.pathname === "/admin/fans" && request.method === "POST") return await AdminRoutes.fansCreate(env, user, request);
+      if (url.pathname === "/admin/content" && request.method === "GET") return await AdminRoutes.contentList(env, user);
+      if (url.pathname === "/admin/content" && request.method === "POST") return await AdminRoutes.contentCreate(env, user, request);
+      if (url.pathname === "/admin/settings" && request.method === "GET") return await AdminRoutes.settings(env, user);
+      if (url.pathname === "/admin/settings" && request.method === "POST") return await AdminRoutes.settingsSave(env, user, request);
+      if (url.pathname === "/admin/media" && request.method === "GET") return await AdminRoutes.media(env, user);
+      if (url.pathname === "/admin/media" && request.method === "POST") return await AdminRoutes.mediaUpload(env, user, request);
 
       // API scaffold
-      if (url.pathname === "/api/mock-a") return mockFeatureA(env, request);
-      if (url.pathname === "/api/mock-b") return mockFeatureB(env, request);
+      if (url.pathname === "/api/mock-a") return await mockFeatureA(env, request);
+      if (url.pathname === "/api/mock-b") return await mockFeatureB(env, request);
 
       return notFound();
     } catch (err: unknown) {
