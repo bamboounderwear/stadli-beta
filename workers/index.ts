@@ -88,6 +88,10 @@ export default {
       if (url.pathname === "/admin/fans" && request.method === "POST") return await AdminRoutes.fansCreate(env, user, request);
       if (url.pathname === "/admin/content" && request.method === "GET") return await AdminRoutes.contentList(env, user);
       if (url.pathname === "/admin/content" && request.method === "POST") return await AdminRoutes.contentCreate(env, user, request);
+      if (url.pathname === "/admin/posts" && request.method === "GET") return await AdminRoutes.postsList(env, user);
+      if (url.pathname === "/admin/posts" && request.method === "POST") return await AdminRoutes.postsSave(env, user, request);
+      if (url.pathname === "/admin/sponsors" && request.method === "GET") return await AdminRoutes.sponsorsList(env, user);
+      if (url.pathname === "/admin/sponsors" && request.method === "POST") return await AdminRoutes.sponsorsSave(env, user, request);
       if (url.pathname === "/admin/settings" && request.method === "GET") return await AdminRoutes.settings(env, user);
       if (url.pathname === "/admin/settings" && request.method === "POST") return await AdminRoutes.settingsSave(env, user, request);
       if (url.pathname === "/admin/media" && request.method === "GET") return await AdminRoutes.media(env, user);
