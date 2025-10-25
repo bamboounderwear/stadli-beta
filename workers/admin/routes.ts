@@ -1,7 +1,7 @@
 import type { Env, Media, Post, Sponsor, User } from "../types";
 import { layout, redirect } from "../utils/html";
 import { AdminViews } from "./templates";
-import { settingsMap } from "../db/queries";
+import { settingsMap, insertFan } from "../db/queries";
 
 async function requireUser(env: Env, user: User | null): Promise<User> {
   if (!user) throw redirect("/login", "Please sign in");
@@ -51,7 +51,7 @@ export const AdminRoutes = {
     const email = String(fd.get("email") ?? "").trim().toLowerCase();
     const favorite = String(fd.get("favorite_team") ?? "").trim() || null;
     if (!name || !email) return redirect("/admin/fans", "Missing name or email");
-    await env.DB.prepare("INSERT INTO fans(name,email,favorite_team) VALUES(?,?,?)").bind(name, email, favorite).run();
+    await insertFan(env.DB, { name, email, favoriteTeam: favorite });
     return redirect("/admin/fans", "Fan added");
   },
 

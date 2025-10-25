@@ -26,7 +26,11 @@ export default {
 
       // Public home
       if (url.pathname === "/" && request.method === "GET") {
-        return await FanRoutes.home(env, user);
+        return await FanRoutes.home(env, user, request);
+      }
+
+      if (url.pathname === "/fans/join" && request.method === "POST") {
+        return await FanRoutes.signup(env, request, ctx);
       }
 
       // Public media proxy (R2)

@@ -19,11 +19,13 @@ export const FanViews = {
     posts,
     sponsors,
     hero,
+    flash,
   }: {
     content: Content | null;
     posts: Post[];
     sponsors: Sponsor[];
     hero: { headline: string; subheadline: string; backgroundUrl: string | null };
+    flash?: string | null;
   }) {
     const heroBg = hero.backgroundUrl ? ` style="background-image:url('${esc(hero.backgroundUrl)}');"` : "";
     const heroOverlay = hero.backgroundUrl ? '<div class="hero__overlay"></div>' : "";
@@ -114,9 +116,39 @@ export const FanViews = {
       `
       : "";
 
+    const flashNotice = flash
+      ? `<div class="fan-signup__flash" role="status">${esc(flash)}</div>`
+      : "";
+
+    const signupSection = `
+      <section class="home-section">
+        <article class="card fan-signup">
+          <h2>Join the Fan List</h2>
+          <p>Get email updates when new stories, highlights, and offers drop.</p>
+          ${flashNotice}
+          <form method="post" action="/fans/join" class="fan-signup__form">
+            <div class="form-field">
+              <label for="fan-name">Name</label>
+              <input id="fan-name" name="name" type="text" maxlength="120" autocomplete="name" required />
+            </div>
+            <div class="form-field">
+              <label for="fan-email">Email</label>
+              <input id="fan-email" name="email" type="email" maxlength="160" autocomplete="email" required />
+            </div>
+            <div class="form-field">
+              <label for="fan-favorite">Favorite Team (optional)</label>
+              <input id="fan-favorite" name="favorite_team" type="text" maxlength="120" autocomplete="organization" />
+            </div>
+            <button class="btn" type="submit">Sign Up</button>
+          </form>
+        </article>
+      </section>
+    `;
+
     return `
       ${heroSection}
       <div class="container home-content">
+        ${signupSection}
         ${newsSection}
         ${contentSection}
         ${sponsorsSection}
