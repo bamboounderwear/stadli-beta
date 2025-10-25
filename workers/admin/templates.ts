@@ -173,7 +173,7 @@ export const AdminViews = {
     const totalMatches =
       data.fans.length + data.campaigns.length + data.segments.length + data.orders.length + data.commands.length;
     const queryDisplay = esc(trimmedQuery);
-    const escapeRegex = (value: string) => value.replace(/[.*+?^${}()|[\]\]/g, "\$&");
+    const escapeRegex = (value: string) => value.replace(/[-/\^$*+?.()|[\]{}]/g, "\$&");
     const highlight = (value: string) => {
       const safe = esc(value);
       if (!hasQuery) return safe;
