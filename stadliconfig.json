@@ -1,0 +1,1239 @@
+{
+  "summary": {
+    "title": "Product Summary",
+    "description": "Stadli is the all-in-one revenue + marketing OS for pro teams outside the big four. It launches with five integrated cores that work together from day one.",
+    "cores": [
+      {
+        "name": "Web App / Website",
+        "description": "A PWA-first team hub combining a modern web experience and branded app shell. Includes Game Day Central, sponsor surfaces, push notifications, and built-in checkout for tickets, merch, and experiences."
+      },
+      {
+        "name": "CRM / 360° Fan Profile",
+        "description": "Unified fan database stitching ticketing, merch, and digital touchpoints into a single view. Enables live segmentation, lifecycle tracking, and identity resolution for every fan."
+      },
+      {
+        "name": "Campaign Engine & Playbooks",
+        "description": "Multi-channel campaign system with sports-ready templates and prebuilt revenue plays. Launch push/email automations, drive purchases, and measure closed-loop revenue attribution from message to checkout."
+      },
+      {
+        "name": "Stadli Narratives & Analytics",
+        "description": "Daily role-based digest (email + dashboard) with one-click, prefilled actions tailored to GM, Marketing, and Ops roles. Powered by Stadli Web Tag for standardized analytics, event tracking, and attribution."
+      },
+      {
+        "name": "Commerce & Ticketing",
+        "description": "Native ticketing and ecommerce layer with secure payment processing, unified checkout, fan wallet, and real-time reconciliation with Tixr and Shopify webhooks."
+      }
+    ]
+  },
+  "flagship_features": {
+    "title": "Flagship Features",
+    "description": "Core capabilities that define Stadli’s MVP and roadmap-ready foundation.",
+    "sections": [
+      {
+        "name": "Web App / Website",
+        "summary": "A unified digital front door for teams and fans. Built PWA-first for speed and reach, with shared data and schema across platforms.",
+        "bullets": [
+          "Game Day Central with live content and offers",
+          "Integrated sponsor surfaces and push notifications",
+          "Built-in checkout for tickets, merch, and experiences",
+          "Seamless fan identity across web and app"
+        ]
+      },
+      {
+        "name": "CRM / 360° Fan Profile",
+        "summary": "A single source of truth for every fan’s engagement, purchase, and activity history.",
+        "bullets": [
+          "Unified fan records from ticketing, merch, and web interactions",
+          "Live segmentation for targeting and personalization",
+          "Identity stitching and deduplication",
+          "Real-time revenue attribution per fan"
+        ]
+      },
+      {
+        "name": "Campaign Engine & Playbooks",
+        "summary": "Automate fan engagement and revenue growth through proven, data-driven plays and dynamic campaigns.",
+        "bullets": [
+          "Prebuilt sports-specific campaigns and templates",
+          "Goal-driven automations (e.g., \"3-game pack conversion\", \"flash merch drop\")",
+          "Embedded checkout CTAs and personalized offers",
+          "Performance tracking and revenue impact dashboards"
+        ]
+      },
+      {
+        "name": "Stadli Narratives & Analytics",
+        "summary": "Insights and actions that surface daily to keep teams aligned on performance and opportunity.",
+        "bullets": [
+          "Role-aware digest with contextual CTAs for GMs, Marketing, and Ops",
+          "Custom dashboards with fan and revenue insights",
+          "Stadli Web Tag for standardized, privacy-first event tracking",
+          "Closed-loop attribution across campaigns, sales, and fan actions"
+        ]
+      },
+      {
+        "name": "Commerce & Ticketing",
+        "summary": "A unified commerce core powering all transactions — from tickets to merch to bundles.",
+        "bullets": [
+          "Native payment processing and secure checkout",
+          "Unified ticketing and ecommerce interface",
+          "Automated reconciliation via Tixr/Shopify webhooks",
+          "Fan wallet and order history with refund management"
+        ]
+      }
+    ]
+  },
+  "app": {
+    "name": "Stadli Admin",
+    "scope": {
+      "mvp": true,
+      "includes_near_term_extensions": true,
+      "fan_app_excluded": true
+    },
+    "entry_point": {
+      "route": "/home",
+      "module": "home",
+      "customizable_widgets_admin_only": true
+    },
+    "navigation": {
+      "layout": "sidebar",
+      "sidebar": [
+        { "id": "home", "label": "Home", "path": "/home" },
+        { "id": "web", "label": "Web App / Website", "path": "/web" },
+        { "id": "crm", "label": "CRM / 360 Fan Profile", "path": "/crm" },
+        { "id": "campaigns", "label": "Campaign Engine & Playbooks", "path": "/campaigns" },
+        { "id": "analytics", "label": "Narratives & Analytics", "path": "/analytics" },
+        { "id": "commerce", "label": "Commerce & Ticketing", "path": "/commerce" },
+        { "id": "settings", "label": "Settings & Admin", "path": "/settings" }
+      ],
+      "topbar": {
+        "global_search": {
+          "enabled": true,
+          "entities": [
+            "fans",
+            "segments",
+            "campaigns",
+            "playbooks",
+            "orders",
+            "tickets",
+            "products",
+            "offers",
+            "pages"
+          ]
+        },
+        "create_menu": [
+          { "id": "create_campaign", "label": "New Campaign", "target": "/campaigns/new" },
+          { "id": "create_segment", "label": "New Segment", "target": "/crm/segments/new" },
+          { "id": "create_offer", "label": "Add Product/Offer", "target": "/commerce/catalog/offers/new" }
+        ],
+        "user_menu": {
+          "items": ["profile", "organization_switch", "sign_out"]
+        },
+        "activity_feed_toggle": true
+      }
+    },
+    "ai_native_helpers": {
+      "principle": "AI-powered helpers are natively integrated into every screen, providing contextual assistance to streamline workflows.",
+      "features": [
+        {
+          "name": "Explain This",
+          "description": "Provides concise explanations of complex data, charts, or feature configurations."
+        },
+        {
+          "name": "Write For Me",
+          "description": "Generates draft copy for campaigns, announcements, and content based on simple prompts."
+        },
+        {
+          "name": "Suggest Ideas",
+          "description": "Brainstorms campaign concepts, fan segments, or promotional offers based on current data."
+        },
+        {
+          "name": "Improve / Predict",
+          "description": "Analyzes existing content or campaigns to suggest improvements and predict performance outcomes."
+        }
+      ],
+      "ui_integration": "Helpers are accessible via subtle, in-context UI elements (e.g., sparkle icons, contextual menus) that feel like a natural part of the interface."
+    },
+    "notifications": {
+      "inline_banners_toasts": true,
+      "activity_feed": {
+        "placement": "dockable_panel",
+        "filters": ["campaigns", "segments", "orders", "errors", "integrations"]
+      },
+      "digest_via_narratives": true
+    },
+    "permissions": {
+      "roles": ["admin", "gm", "marketing", "ops"],
+      "rules": [
+        { "action": "customize_dashboard", "allowed_roles": ["admin"] },
+        { "action": "manage_users_roles", "allowed_roles": ["admin"] },
+        { "action": "send_campaigns", "allowed_roles": ["admin", "marketing"] },
+        { "action": "refund_orders", "allowed_roles": ["admin", "ops"] },
+        { "action": "edit_integrations", "allowed_roles": ["admin"] },
+        { "action": "create_segments", "allowed_roles": ["admin", "marketing", "gm"] },
+        { "action": "edit_catalog", "allowed_roles": ["admin", "ops"] }
+      ]
+    },
+    "modules": {
+      "home": {
+        "id": "home",
+        "path": "/home",
+        "purpose": "Landing dashboard with KPIs and quick actions. Admins can configure widgets.",
+        "widgets_default": [
+          "revenue_summary",
+          "upcoming_events_readiness",
+          "active_campaigns",
+          "segment_movers",
+          "orders_refunds_snapshot",
+          "integration_health"
+        ],
+        "interactions": [
+          { "widget": "revenue_summary", "actions": ["view_details"] },
+          { "widget": "orders_refunds_snapshot", "actions": ["retarget_abandoned_carts"] }
+        ],
+        "near_term_extensions": [
+          "dashboard_presets_per_role",
+          "per_user_pin_favorites"
+        ]
+      },
+      "web": {
+        "id": "web",
+        "path": "/web",
+        "purpose": "Configure the PWA-first website: pages, slots, sponsor and offer surfaces, deep links.",
+        "sections": [
+          { "id": "pages", "label": "Pages & Navigation", "route": "/web/pages" },
+          { "id": "blocks", "label": "Blocks & Slots", "route": "/web/blocks" },
+          { "id": "offers_surfaces", "label": "Offer Surfaces", "route": "/web/offers-surfaces" },
+          { "id": "sponsor_surfaces", "label": "Sponsor Surfaces", "route": "/web/sponsor-surfaces" },
+          { "id": "push_entrypoints", "label": "Push Entrypoints", "route": "/web/push-entrypoints" }
+        ],
+        "key_flows": [
+          "page_slot -> insert_offer_card -> pick_catalog_item -> set_audience -> publish",
+          "gameday_central -> configure_pre_during_post_layouts"
+        ],
+        "near_term_extensions": [
+          "ab_testing_blocks",
+          "scheduled_page_states"
+        ]
+      },
+      "crm": {
+        "id": "crm",
+        "path": "/crm",
+        "purpose": "Unified fan records, segmentation, lifecycle, and attribution.",
+        "sections": [
+          { "id": "fans_list", "label": "Fans", "route": "/crm/fans" },
+          { "id": "fan_detail", "label": "Fan Detail", "route": "/crm/fans/:id" },
+          { "id": "segments", "label": "Segments", "route": "/crm/segments" },
+          { "id": "segment_builder", "label": "Segment Builder", "route": "/crm/segments/new" },
+          { "id": "data_mgmt", "label": "Data Management", "route": "/crm/data" }
+        ],
+        "segment_builder": {
+          "rules_sources": [
+            "behavior_events",
+            "purchase_history",
+            "web_tag_events",
+            "proximity_to_game_day"
+          ],
+          "preview_validation": true
+        },
+        "interactions": [
+          "fan_or_segment -> quick_actions(send_message, add_to_playbook, exclude_from_campaign, create_lookalike)",
+          "segment_detail -> linked_campaigns -> view_conversions"
+        ],
+        "near_term_extensions": [
+          "cohort_explorer",
+          "dedupe_review_queue",
+          "consent_policy_rules"
+        ]
+      },
+      "campaigns": {
+        "id": "campaigns",
+        "path": "/campaigns",
+        "purpose": "Run campaigns, browse Playbooks, manage recommendations and automations.",
+        "sections": [
+          { "id": "campaigns_list", "label": "Campaigns", "route": "/campaigns/list" },
+          { "id": "campaign_calendar", "label": "Calendar", "route": "/campaigns/calendar" },
+          { "id": "builder", "label": "Builder", "route": "/campaigns/new" },
+          { "id": "playbooks_gallery", "label": "Playbooks", "route": "/campaigns/playbooks" },
+          { "id": "recommendations", "label": "Recommendations", "route": "/campaigns/recommendations" },
+          { "id": "automations", "label": "Automations", "route": "/campaigns/automations" }
+        ],
+        "builder_capabilities": [
+          "audience_select_from_segment",
+          "content_blocks",
+          "offer_insertion",
+          "send_time_controls",
+          "safeguards",
+          "conversion_goal"
+        ],
+        "interactions": [
+          "from_analytics_chart -> open_builder_prefilled",
+          "from_segment -> open_playbook_prefilled",
+          "campaign_detail -> attribution_panel"
+        ],
+        "near_term_extensions": [
+          "abn_testing",
+          "holdouts",
+          "goal_optimization",
+          "content_snippets_library"
+        ]
+      },
+      "analytics": {
+        "id": "analytics",
+        "path": "/analytics",
+        "purpose": "Narratives feed and analytical dashboards, including Web Tag configuration and health.",
+        "sections": [
+          { "id": "narratives_feed", "label": "Narratives", "route": "/analytics/narratives" },
+          { "id": "overview", "label": "Overview Dashboard", "route": "/analytics/overview" },
+          { "id": "attribution", "label": "Attribution", "route": "/analytics/attribution" },
+          { "id": "funnel", "label": "Funnel", "route": "/analytics/funnel" },
+          { "id": "segments_perf", "label": "Segments", "route": "/analytics/segments" },
+          { "id": "web_tag", "label": "Web Tag", "route": "/analytics/web-tag" }
+        ],
+        "narratives": {
+          "role_aware": true,
+          "card_actions": ["dismiss", "snooze", "bookmark", "open_source_object"],
+          "suggested_next_actions": true
+        },
+        "web_tag": {
+          "status_diagnostics": ["events_received", "latency", "consent", "dnt"],
+          "event_catalog": ["page", "cta", "sdclid_clickouts"],
+          "server_side_truth": ["tixr_webhooks", "shopify_webhooks"],
+          "near_term": ["custom_events", "payload_validator"]
+        },
+        "interactions": [
+          "chart_or_card -> open_campaign_or_playbook_with_context"
+        ],
+        "near_term_extensions": [
+          "scheduled_exports_email_pdf",
+          "anomaly_detection_with_suggested_plays"
+        ]
+      },
+      "commerce": {
+        "id": "commerce",
+        "path": "/commerce",
+        "purpose": "Catalog, orders, promotions, checkout, and reconciliation for ticketing and ecommerce.",
+        "sections": [
+          { "id": "catalog_tickets", "label": "Tickets & Packs", "route": "/commerce/catalog/tickets" },
+          { "id": "catalog_products", "label": "Products & Bundles", "route": "/commerce/catalog/products" },
+          { "id": "offers", "label": "Offers", "route": "/commerce/catalog/offers" },
+          { "id": "orders_refunds", "label": "Orders & Refunds", "route": "/commerce/orders" },
+          { "id": "promotions", "label": "Promotions", "route": "/commerce/promotions" },
+          { "id": "checkout_payments", "label": "Checkout & Payments", "route": "/commerce/checkout" },
+          { "id": "reconciliation", "label": "Reconciliation", "route": "/commerce/reconciliation" }
+        ],
+        "interactions": [
+          "offer -> place_on_site -> open_web_slot_picker",
+          "orders_table -> retarget_abandoned -> open_recommendations_or_playbook"
+        ],
+        "near_term_extensions": [
+          "fan_wallet_credits",
+          "subscriptions_memberships",
+          "pos_import"
+        ]
+      },
+      "settings": {
+        "id": "settings",
+        "path": "/settings",
+        "purpose": "Admin-only configuration for roles, integrations, privacy, customization, and environments.",
+        "sections": [
+          { "id": "users_roles", "label": "Users & Roles", "route": "/settings/users" },
+          { "id": "integrations", "label": "Integrations", "route": "/settings/integrations" },
+          { "id": "data_privacy", "label": "Data & Privacy", "route": "/settings/privacy" },
+          { "id": "customization", "label": "Customization (Admin Only)", "route": "/settings/customization" },
+          { "id": "environments", "label": "Environments", "route": "/settings/environments" }
+        ],
+        "integrations_supported": ["tixr", "shopify", "email_provider", "push_provider", "webhooks"],
+        "near_term_extensions": [
+          "module_toggles_per_team",
+          "approval_workflows_for_sends_and_refunds"
+        ]
+      }
+    },
+    "patterns": {
+      "insight_to_action": [
+        "analytics_chart -> create_campaign_prefilled",
+        "segment -> launch_playbook_prefilled",
+        "offer_performance -> adjust_price_or_duplicate",
+        "orders_exception -> open_related_automation",
+        "web_tag_issue -> open_diagnostics_and_recommend_fix"
+      ],
+      "global_search_commands": {
+        "commands": [
+          { "cmd": "/new campaign", "target": "/campaigns/new" },
+          { "cmd": "/add segment rule", "target": "/crm/segments/new" },
+          { "cmd": "/issue refund", "target": "/commerce/orders" }
+        ],
+        "near_term": ["recent_objects", "cross_object_quick_previews"]
+      }
+    },
+    "mvp_screens": [
+      "/home",
+      "/crm/fans",
+      "/crm/fans/:id",
+      "/crm/segments",
+      "/crm/segments/new",
+      "/campaigns/list",
+      "/campaigns/new",
+      "/campaigns/playbooks",
+      "/analytics/narratives",
+      "/analytics/overview",
+      "/analytics/attribution",
+      "/web/pages",
+      "/web/blocks",
+      "/web/offers-surfaces",
+      "/commerce/catalog/tickets",
+      "/commerce/catalog/products",
+      "/commerce/catalog/offers",
+      "/commerce/orders",
+      "/commerce/checkout",
+      "/settings/users",
+      "/settings/integrations"
+    ],
+    "near_term_extensions_index": {
+      "home": ["dashboard_presets_per_role", "per_user_pin_favorites"],
+      "crm": ["cohort_explorer", "dedupe_review_queue", "consent_policy_rules"],
+      "campaigns": ["abn_testing", "holdouts", "goal_optimization", "content_snippets_library"],
+      "analytics": ["scheduled_exports_email_pdf", "anomaly_detection_with_suggested_plays", "web_tag.custom_events", "web_tag.payload_validator"],
+      "web": ["ab_testing_blocks", "scheduled_page_states"],
+      "commerce": ["fan_wallet_credits", "subscriptions_memberships", "pos_import"],
+      "settings": ["module_toggles_per_team", "approval_workflows_for_sends_and_refunds"]
+    },
+    "principles": [
+      "predictable_sidebar_navigation",
+      "role_aware_default_widgets",
+      "insight_to_action_linkage",
+      "separation_of_concerns_with_deep_links",
+      "admin_controls_customization_and_sensitive_actions",
+      "scalable_information_architecture"
+    ]
+  },
+  "development_philosophy": {
+    "title": "Development Philosophy & Best Practices",
+    "summary": "Our approach to building Stadli is grounded in a set of core principles that ensure stability, scalability, and maintainability.",
+    "principles": [
+      {
+        "name": "Safe Experimentation",
+        "description": "New work is isolated to prevent production risk.",
+        "practices": [
+          "Sandboxes & Playgrounds: Every new feature, integration, or significant change is first developed and tested in isolated sandbox environments.",
+          "This allows for free experimentation without any risk to production data or services."
+        ]
+      },
+      {
+        "name": "Production Integrity",
+        "description": "Production is protected by process and automation.",
+        "practices": [
+          "Protecting Production: The production environment is sacred. Direct changes are strictly forbidden.",
+          "All deployments follow a rigorous CI/CD pipeline with automated checks, and rollbacks are planned for."
+        ]
+      },
+      {
+        "name": "Documentation as a Deliverable",
+        "description": "Documentation is part of the product, produced continuously.",
+        "practices": [
+          "Continuous Documentation: Every API endpoint, data model change, and architectural decision is documented as it's made."
+        ]
+      },
+      {
+        "name": "Visibility and Auditing",
+        "description": "Operational transparency through comprehensive telemetry.",
+        "practices": [
+          "Comprehensive Logging: Structured logs for application events, errors, and access patterns are maintained to debug issues, monitor performance, and audit activity effectively."
+        ]
+      },
+      {
+        "name": "Built for Change",
+        "description": "Architecture favors modularity and loose coupling.",
+        "practices": [
+          "Modular Architecture: Components are loosely coupled and communicate through well-defined APIs.",
+          "This enables updating, replacing, or scaling individual parts without affecting the entire platform."
+        ]
+      },
+      {
+        "name": "LLM-Centric Architecture",
+        "description": "Living documentation for AI collaboration and developer onboarding.",
+        "practices": [
+          "Every directory and module contains a dedicated context file (e.g., \"_context.md\").",
+          "This file serves as a \"living document\" explaining the purpose, key functions, and relationships of the code within it.",
+          "Ensures any developer or Large Language Model (LLM) can instantly grasp context for AI-assisted development, refactoring, and debugging."
+        ]
+      }
+    ]
+  }
+}
+
+{
+  "stadliBrandIdentity": {
+    "version": "2.2.0",
+    "systemName": "Stadli Brand Identity System — Modular Dark UI",
+    "extendsFrom": [
+      "Stadli Brand Identity System"
+    ],
+    "brandPlatform": {
+      "purpose": "Make modern fandom easy for small, professional sports teams by unifying data and turning it into action fans can feel.",
+      "promise": "Big-league marketing power for lean front offices: a branded app, unified fan profiles, and a campaign engine that drives measurable revenue.",
+      "positioning": "The all-in-one revenue + marketing OS for sports teams. Anti-fragmentation. Pro-outcomes.",
+      "personality": [
+        "Bold",
+        "Rebel",
+        "Data-first",
+        "Simple",
+        "Visuals carry stadium emotion; product stays calm, legible, fast."
+      ],
+      "values": [
+        "Outcomes over objects",
+        "Speed over ceremony",
+        "Open by default",
+        "Explainable AI",
+        "Respect the fan"
+      ],
+      "intendedAudience": [
+        "Small to mid-size professional sports teams",
+        "Marketing & revenue leaders",
+        "Ops and data teams",
+        "Modern enterprises in adjacent live-event verticals"
+      ],
+      "emotionalIntent": [
+        "confident",
+        "high-energy",
+        "data-driven",
+        "human",
+        "inclusive"
+      ]
+    },
+    "voiceAndTone": {
+      "voicePillars": [
+        "Direct & declarative — big verbs, short sentences",
+        "Commercially honest — always name the revenue impact",
+        "Human — stadium energy without clichés",
+        "Inclusive — reflect the full spectrum of fans and teams"
+      ],
+      "toneSliders": {
+        "heroMessagingAds": "High-energy, declarative, 5–8 words",
+        "productUiDocs": "Crisp, instructive, friendly imperatives",
+        "dataReports": "Calm, factual, with a short “So what?”",
+        "sensitiveComms": "Clear, empathetic, solution-first"
+      },
+      "copyPatterns": {
+        "headlineExamples": [
+  "Unify your fans. Amplify revenue.",
+  "Big-league marketing for small teams.",
+  "Run campaigns that drive growth.",
+  "Run campaigns that convert.",
+  "Move fast. Measure faster.",
+  "From clicks to concessions, tracked.",
+  "Turn cheers into revenue.",
+  "From clicks to season renewals.",
+  "Campaigns you can actually prove.",
+  "Explainable AI that sells seats.",
+  "Know every fan. Act on it.",
+  "One app. Every fan touchpoint.",
+  "CRM built for ticket revenue.",
+  "Turn every fan interaction into measurable revenue.",
+  "Branded, fast, always on.",
+  "Know who’s in your house.",
+  "Analytics fans can feel.",
+  "Press send. Fill seats.",
+  "Right fan. Right now.",
+  "Plays built for gameday.",
+  "Today’s story, your actions.",
+  "The day, de-noised.",
+  "Fees down. Payouts up.",
+  "Tap to buy. Done."
+],
+        "subheadlineRules": "1 brief line explaining how value is delivered; optionally add timeframe or metric.",
+        "ctaPrimary": [
+          "Get started",
+          "Book a demo",
+          "Sign up",
+          "Start your free trial",
+          "Go live with Stadli",
+          "Unlock your data",
+          "Run your first campaign"
+        ],
+        "ctaSecondary": [
+          "Learn more",
+          "View details",
+          "See how it works",
+          "Explore the features",
+          "Discover what’s new",
+          "Compare plans",
+          "View campaign templates"
+        ],
+        "featureBlock": {
+          "titleStyle": "Noun or short phrase (1–3 words).",
+          "bodyStyle": "One sentence of utility-focused text."
+        },
+        "lengthGuides": {
+          "heroHeadlineWords": "≤8",
+          "subheadlineChars": "70–140",
+          "cardBodyChars": "90–140",
+          "ctaChars": "8–18"
+        }
+      }
+    }
+  },
+  "visualIdentity": {
+    "logo": {
+      "type": "Wordmark",
+      "name": "Stadli",
+      "preferredFormats": [
+        "SVG"
+      ],
+      "secondaryFormats": [
+        "PNG",
+        "PDF",
+        "JPG"
+      ],
+      "coloration": "White on dark / Black on light",
+      "assets": {
+      "white": "/logo-white.svg",
+      "black": "/logo-black.svg"
+    },
+      "clearSpace": "cap-height S around the mark",
+      "minimumSize": {
+        "digital": "20px",
+        "print": "6 mm"
+      },
+      "rules": [
+        "Do not colorize the mark",
+        "Do not apply effects (glow, bevel, gradient)"
+      ],
+      "lockups": {
+        "responsive": "N/A",
+        "stacked": "N/A",
+        "iconOnly": "N/A",
+        "appIcon": {
+          "status": "comingSoon"
+        },
+        "socialAvatar": {
+          "status": "comingSoon"
+        },
+        "favicon": {
+          "status": "comingSoon"
+        }
+      }
+    },
+    "layoutDNA": [
+      "Bold typography layouts with large, confident text blocks",
+      "Grid-based compositions with structured yet dynamic visual balance",
+      "Photography integrates naturally within frames",
+      "Messaging emphasizes clarity, confidence, and modern digital energy",
+      "contrast plays"
+    ]
+  },
+  "layoutAndComposition": {
+    "grid": {
+      "columnsDesktop": 12,
+      "gutter": 24,
+      "marginDesktop": 64,
+      "marginTablet": 40,
+      "marginMobile": 20,
+      "maxContentWidth": 1440
+    },
+    "cardSystem": {
+      "cornerRadius": 8,
+      "padding": {
+        "x": 20,
+        "y": 20
+      },
+      "spacingBetweenCards": 20,
+      "variants": [
+        "default-dark",
+        "outlined",
+        "accent-header",
+        "photo-card"
+      ]
+    },
+    "heroPatterns": [
+  {
+    "name": "Left Headline, Right Visual",
+    "columns": {
+      "text": 7,
+      "visual": 5
+    },
+    "rules": [
+      "Oversized headline on left with two short lines.",
+      "Right column uses a photo, chart, or mock.",
+      "CTA row beneath headline; secondary CTA outlined."
+    ]
+  },
+  {
+    "name": "Stacked Center",
+    "columns": {
+      "text": 12
+    },
+    "rules": [
+      "Centered headline, subheadline, then CTA row.",
+      "Optional accent strip (48–96px) above or below."
+    ]
+  },
+  {
+    "name": "Centered Hero with Visual Grid",
+    "columns": {
+      "text": 12
+    },
+    "rules": [
+      "Headline and subheadline centered at top of page.",
+      "Supporting grid of visuals displayed below headline.",
+      "Primary CTA centered beneath supporting text."
+    ]
+  },
+  {
+    "name": "Bold Center Stack",
+    "columns": {
+      "text": 12
+    },
+    "rules": [
+      "Large central headline spans full width of hero.",
+      "Subheadline placed below headline in smaller weight.",
+      "Single prominent CTA aligned directly beneath text."
+    ]
+  },
+  {
+    "name": "Split Visual with Metric Cards",
+    "columns": {
+      "text": 6,
+      "visual": 6
+    },
+    "rules": [
+      "Left column contains headline and supporting paragraph.",
+      "Right column displays floating data or stat cards.",
+      "CTA row beneath or beside text section."
+    ]
+  },
+  {
+    "name": "Minimal Center Focus",
+    "columns": {
+      "text": 12
+    },
+    "rules": [
+      "Hero image or video used as subtle background.",
+      "Headline centered over media with medium-weight text.",
+      "Optional CTAs or labels overlay visual area."
+    ]
+  },
+  {
+    "name": "Left Text, Right Accent Visual",
+    "columns": {
+      "text": 7,
+      "visual": 5
+    },
+    "rules": [
+      "Strong left-aligned headline and paragraph block.",
+      "Right side contains complementary floating icons or mockups.",
+      "CTA buttons stacked below headline for quick interaction."
+    ]
+  }
+],
+    "sectionPatterns": [
+  "Feature grid or split layout highlighting key product benefits.",
+  "Metric-focused band with charts, counters, or achievement visuals.",
+  "Testimonial or logo strip building credibility and social proof.",
+  "Case study showcase blending visuals, quotes, and short narratives.",
+  "Pricing or plan grid with emphasized primary option and CTA.",
+  "Bold closing section with focused message and conversion button."
+],
+    "textVisualInteraction": "Text anchors left/top; visuals align right/bottom within their cards. Maintain ≥24px safe space around CTAs.",
+    "photoIntegrationBias": "Increase visual density; prioritize photography or photo-backed cards in at least 1 of every 2 major sections."
+  },
+  "photography": {
+    "subject": "People first. Real fans, raw moments, documentary style.",
+    "orientation": "Vertical-first (optimize for mobile usage).",
+    "lighting": "Warm stadium energy, honest contrast",
+    "casting": "Inclusive, authentic",
+    "resolution": {
+      "print": "300 DPI",
+      "digital": "1080p minimum"
+    },
+    "composition": [
+      "Rule of thirds",
+      "Clear focal point",
+      "Pleasing color harmonies",
+      "Abstract lens flares",
+      "Motion blur"
+    ],
+    "avoid": [
+      "heavy filters",
+      "generic stock"
+    ]
+  },
+  "colorSystem": {
+    "principles": [
+      "Neutral-first: Ink and Surface carry every background; Stadli White handles contrast",
+      "Every accent use must have a clear reason — otherwise drop it",
+      "deep neutrals as canvas, vibrant accents drive attention",
+      "Block-based layouts pair color fields with stark typography",
+      "High contrast  readability across text, data, and UI",
+      "photography and anchor content modules"
+    ],
+    "neutrals": {
+      "ink": {
+        "hex": "#0B0B0E",
+        "use": "Primary backgrounds and keylines"
+      },
+      "surface": {
+        "hex": "#121418",
+        "use": "Cards, panels, and contrast layers"
+      },
+      "stadliWhite": {
+        "hex": "#FFFFFF",
+        "use": "Primary text, logos, icons"
+      },
+      "derived": {
+        "surfaceContrast": "#171A1F",
+        "surfaceContrastUse": "Surface contrasts like borders and small neutral highlights",
+        "border": "rgba(255,255,255,0.1)",
+        "textSecondary": "#B7BEC7",
+        "textMuted": "#8B92A1"
+      }
+    },
+    "accents": {
+      "magentaBlaze": {
+        "light": {
+          "hex": "#FF87C8",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#FF2E9A",
+          "use": "Campaigns",
+          "emotion": "Excitement"
+        },
+        "dark": {
+          "hex": "#D40076",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "aquaTeal": {
+        "light": {
+          "hex": "#A3F9E8",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#4CF3D1",
+          "use": "Engagement",
+          "emotion": "Freshness"
+        },
+        "dark": {
+          "hex": "#00D1A7",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "electricOrange": {
+        "light": {
+          "hex": "#FF996F",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#FF5A1F",
+          "use": "Revenue",
+          "emotion": "Urgency"
+        },
+        "dark": {
+          "hex": "#D13A00",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "skyCyan": {
+        "light": {
+          "hex": "#98E5FF",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#45D7FF",
+          "use": "CRM",
+          "emotion": "Transparency"
+        },
+        "dark": {
+          "hex": "#00B6E6",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "radiantYellow": {
+        "light": {
+          "hex": "#FFE992",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#FFD93B",
+          "use": "Growth",
+          "emotion": "Optimism"
+        },
+        "dark": {
+          "hex": "#E6B800",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "pulseGreen": {
+        "light": {
+          "hex": "#C2E0A6",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#99CD64",
+          "use": "Loyalty",
+          "emotion": "Trust"
+        },
+        "dark": {
+          "hex": "#72A93A",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "stadiumPurple": {
+        "light": {
+          "hex": "#C59EFF",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#9B5CFF",
+          "use": "Innovation",
+          "emotion": "Creativity"
+        },
+        "dark": {
+          "hex": "#7426F2",
+          "use": "High-contrast text/icons"
+        }
+      },
+      "emberRed": {
+        "light": {
+          "hex": "#FF9D9D",
+          "use": "Subtle highlights"
+        },
+        "base": {
+          "hex": "#FF4B4B",
+          "use": "Alerts",
+          "emotion": "Intensity"
+        },
+        "dark": {
+          "hex": "#E01C1C",
+          "use": "High-contrast text/icons"
+        }
+      }
+    },
+    "featureColorAssignments": {
+      "unifiedFanProfile": {
+        "primary": "magentaBlaze.light",
+        "hex": "#FF87C8",
+        "label": "Magenta Blaze",
+        "alternates": [
+          "aquaTeal.base",
+          "stadiumPurple.base"
+        ],
+        "notes": "Primary per brief. Use alternates if adjacent features already use magenta on the same surface."
+      },
+      "campaignEngine": {
+        "primary": "electricOrange.base",
+        "hex": "#FF5A1F",
+        "label": "Electric Orange",
+        "alternates": [
+          "radiantYellow.base",
+          "magentaBlaze.base"
+        ],
+        "notes": "Orange = performance/revenue. Switch to yellow for growth-focused narratives."
+      },
+      "analytics": {
+        "primary": "pulseGreen.base",
+        "hex": "#99CD64",
+        "label": "Pulse Green",
+        "alternates": [
+          "skyCyan.dark",
+          "stadiumPurple.base"
+        ],
+        "notes": "Green = clarity/trust. Cyan alt for data/CRM contexts; Purple for innovation stories."
+      },
+      "brandedApp": {
+        "primary": "skyCyan.base",
+        "hex": "#45D7FF",
+        "label": "Sky Cyan",
+        "alternates": [
+          "aquaTeal.dark",
+          "radiantYellow.base"
+        ],
+        "notes": "Assigned per instruction to add another brand color to features."
+      }
+    },
+    "useColorMap": {
+      "CRM": "skyCyan.base",
+      "Revenue": "electricOrange.base",
+      "Growth": "radiantYellow.base",
+      "Loyalty": "pulseGreen.base",
+      "Engagement": "aquaTeal.base",
+      "Innovation": "stadiumPurple.base",
+      "Alerts": "emberRed.base"
+    },
+    "usage": {
+      "primaryAccentSelectionRule": "Pick exactly one accent family per artifact; dashboards may use accents with clear separation.",
+      "ratioGuidance": {
+        "neutrals": "≥85%",
+        "accents": "≤15%"
+      },
+      "graphRule": "Neutrals for baselines; accents for emphasis only.",
+      "chartAccentPolicy": "Exactly one accent per chart; all other series use neutrals (baselineColor/textSecondary). Do not accent axes, gridlines, or legends.",
+      "rotationPolicy": {
+        "rule": "Always vary feature and use colors across designs depending on context.",
+        "constraints": [
+          "Do not repeat the same accent family in consecutive assets within the same campaign unless semantically required (e.g., Revenue → electricOrange).",
+          "When two feature cards appear on the same surface, use different families from their primary/alternate sets."
+        ],
+        "fallback": "If conflict remains, prefer alternates in order listed under featureColorAssignments."
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": "Inter",
+    "weights": [
+      400,
+      500
+    ],
+    "scale": {
+      "displayH1": {
+        "size": "4rem",
+        "px": 64,
+        "weight": 500,
+        "lineHeight": 1.05,
+        "letterSpacing": -0.5
+      },
+      "h1": "3rem",
+      "h2": "2.25rem",
+      "h3": "1.5rem",
+      "body": "1rem",
+      "small": "0.875rem",
+      "eyebrow": {
+        "size": "0.875rem",
+        "weight": 500,
+        "tracking": 0.5,
+        "case": "uppercase"
+      }
+    },
+    "rules": [
+      "Headlines ≤8 words, sentence case",
+      "One accent word allowed for emphasis",
+      "Hierarchy through weight + size + neutral contrast",
+      "Restrict to two sizes per card to reduce noise"
+    ],
+    "cssTokens": {
+      "--font-display": "\"Inter\", system-ui, sans-serif",
+      "--font-body": "\"Inter\", system-ui, sans-serif",
+      "--display-h1": "5.653rem",
+      "--h1": "3.999rem",
+      "--h2": "2.827rem",
+      "--h3": "1.999rem",
+      "--body": "1rem",
+      "--small": "0.875rem"
+    }
+  },
+  "iconographyAndShapes": {
+    "style": "Geometric, minimal, rounded terminals",
+    "strokeWeightPx": 2,
+    "cornerRadiusPx": 16,
+    "motifs": [
+      "Forms express clarity, momentum, and data flow through simple geometry",
+      "Shapes balance energy and precision — motion-forward but grounded",
+      "Visual language reinforces trust, action, and modern digital rhythm",
+      "Icons should use SVG, Unicode, or widely supported glyphs that convey clear, universal meaning across languages and devices."
+    ],
+    "do": [
+      "Use single-color svg icons (accent or Stadli White).",
+      "Keep generous negative space inside icon tiles."
+    ],
+    "dont": [
+      "No skeuomorphic details",
+      "Avoid strokes thinner than 1.5px on dark surfaces"
+    ]
+  },
+  "backgroundsAndPatterns": {
+    "base": "Solid near-black canvas (#0B0B0E)",
+    "surfaceVariants": [
+      "slightly lighter panels",
+      "accent header strips 56–96px high"
+    ],
+    "dividers": "1px hairlines with 6–10% Stadli White",
+    "optionalTexture": "Subtle noise ≤5% opacity"
+  },
+  "components": {
+    "buttons": {
+  "policy": { "neutralOnly": true, "disallowAccentFill": true },
+  "defaultVariant": "solid",
+
+  "variants": {
+    "solid": {
+      "shape": "rounded-2xl",
+      "paddingXY": [18, 14],
+      "background": "{colorSystem.neutrals.stadliWhite.hex}",
+      "textColor": "{colorSystem.neutrals.ink.hex}",
+      "border": "1px solid rgba(255,255,255,0.18)",
+      "focusRing": "1px outline {colorSystem.accents.electricOrange.base.hex}"
+    },
+    "outline": {
+      "shape": "rounded-2xl",
+      "paddingXY": [18, 14],
+      "background": "transparent",
+      "textColor": "{colorSystem.neutrals.stadliWhite.hex}",
+      "border": "1px solid rgba(255,255,255,0.18)",
+      "focusRing": "1px outline {colorSystem.accents.electricOrange.base.hex}"
+    }
+  },
+
+  "rules": [
+    "CTAs must be neutral (Stadli White/Ink only).",
+    "Do not fill CTAs with accent colors; accents may be used for focus ring or small indicators."
+  ]
+},
+    "chips": {
+      "dotChip": {
+        "leftDot": "8–10px, solid accent",
+        "label": "small",
+        "background": "derived.surfaceContrast"
+      }
+    },
+    "forms": {
+      "field": {
+        "fill": "derived.surfaceContrast",
+        "radius": 14,
+        "border": "1px solid rgba(255,255,255,0.1)",
+        "focus": "1px outline in selected accent"
+      }
+    },
+    "cards": {
+      "feature": {
+        "icon": "accent dot or simple glyph",
+        "title": "h3",
+        "body": "small",
+        "ctaInline": "text link or chevron",
+        "colorSource": "colorSystem.featureColorAssignments[featureKey].primary (fallback to alternates by rotationPolicy)"
+      },
+      "stat": {
+        "title": "eyebrow",
+        "valueStyle": {
+          "sizePx": 28,
+          "weight": 500
+        },
+        "viz": "single bar/line with accent color"
+      },
+      "notification": {
+        "variants": [
+          "success (aquaTeal.dark border)",
+          "warning (radiantYellow.dark border)",
+          "info (skyCyan.dark border)",
+          "error (emberRed.dark border)"
+        ],
+        "icon": "monoline symbol in matching accent"
+      }
+    },
+    "logoStrip": {
+      "treatment": "monochrome partner logos",
+      "opacity": 0.85,
+      "spacing": 32
+    }
+  },
+  "dataViz": {
+    "style": "Minimalist; single-accent charts; rounded bars; thin axis lines",
+    "lineWeightPx": 2,
+    "gridlines": "off or very subtle (≤10% opacity)",
+    "labels": "short, tabular numerals; minimal ticks",
+    "rule": "Use only one accent color per chart; all other series and elements remain neutral.",
+    "defaults": {
+      "baselineColor": "rgba(255,255,255,0.18)",
+      "accent": "selected accent base",
+      "positive": "accent base",
+      "negative": "emberRed.base"
+    }
+  },
+  "animationAndInteraction": {
+    "motion": {
+      "entrance": "fade + 8px upward slide, 200–300ms, ease-out",
+      "hover": "elevate cards by +4px shadow; buttons scale 1.02",
+      "chipPulse": "subtle 2s opacity oscillation for dot indicators (optional)"
+    }
+  },
+  "patternsAndTemplates": {
+"repeatablePatterns": [
+  "Accent color tiles or strips to segment content zones cleanly.",
+  "Rows of rounded cards with consistent padding and accent dots.",
+  "Hero headline split across two lines with mirrored verbs or outcomes.",
+  "Single-accent charts and progress widgets anchoring proof or metric blocks.",
+  "Diagonal or asymmetrical dividers suggesting motion and energy.",
+  "Floating stat overlays that pulse subtly with team or fan data.",
+  "Thin neon outlines framing feature modules against deep neutrals.",
+  "Split backgrounds pairing neutral ink fields with vibrant accent slashes.",
+  "Compact subgrid clusters mixing photos, metrics, and quick CTAs.",
+  "Eyebrow labels above headlines to cue context or data source.",
+  "Transparent card layers stacking over blurred stadium backdrops.",
+  "Up-right arrow motifs subtly repeating across charts and buttons.",
+  "Dot and bar animations triggered on scroll or hover states.",
+  "Accent glow lines tracing key motion or data paths.",
+  "Alternating surface panels (ink / surfaceContrast) for vertical rhythm.",
+  "Micro hero banners combining text-on-dark with accent light edges.",
+  "Circle chips acting as color-coded fan or data identifiers.",
+  "Minimal pulse animation for live data or campaign status indicators.",
+  "Neutral CTAs paired with accented focus rings for accessibility contrast.",
+  "Grid overlays maintaining modular balance even under motion effects."
+],
+    "idealUseCases": [
+      "Web hero sections and sales pages",
+      "Feature overviews and pricing pages",
+      "Webinar promos and event splash graphics",
+      "Performance/metric callouts on social",
+      "Product one-pagers and pitch decks"
+    ],
+    "aspectRatiosAndSizes": {
+      "webHero": "1440x900",
+      "socialLandscape": "1200x630",
+      "socialSquare": "1080x1080",
+      "storyVertical": "1080x1920",
+      "presentationSlide": "1920x1080"
+    },
+    "compositionAlgorithm": {
+      "steps": [
+        "Start with intent and audience: define the job of the piece (Sell, Prove, Educate, Announce) and the one feeling/action you want to drive.",
+        "Choose a narrative frame that fits the context (promise-first, proof-first, or story-then-offer). Keep headlines tight and declarative.",
+    "Select a single accent family that semantically reinforces the message (e.g., Revenue → electricOrange). Use it to guide attention, not decorate.",
+    "Establish hierarchy that survives any medium: outcome line → supporting line → single next step. The message should read clearly with or without imagery.",
+    "Pair words with the clearest evidence for the channel: photo for human moments, chart for change, mock for product clarity—graspable at a glance.",
+    "Add 1–3 supporting modules that ladder back to the promise (features, metrics, case proof, testimonial/logo strip). Order flexes to suit the context.",
+    "Fit the structure to the medium: layout grid/typographic rhythm for print/web; visual sequence/beat for video; spatial balance for OOH; scannable blocks for email/social.",
+    "Close decisively with one action and a confidence cue (short testimonial, logo strip, guarantee, or data source).",
+    "Throughout: keep neutrals dominant, maintain strong contrast and legibility, vary accents across a campaign set, and avoid visual noise.",
+    "Favor photographic or motion-based evidence (fan faces, stadium scenes, player action) as primary proof elements when emotion or community is central."
+      ],
+      "accentSelectionRule": "Choose exactly one accent family per artifact; complex, data-dense pieces may use two in clearly separated zones. Apply accents only where emphasis is needed (chips, icons, charts, highlights, focus states). Action elements remain neutral."
+    }
+  },
+  "accessibilityAndQA": {
+    "rules": [
+      "Enforce the semantic/context rules for colors",
+      "Maintain 4.5:1 contrast for body text (3:1 for large display)",
+      "CTAs must be neutral (Stadli White/Ink only)",
+      "Headlines ≤8 words for clean translation",
+      "Enforce brand guardrails and neutral CTAs",
+      "Focus states must be visible using selected accent"
+    ]
+  },
+  "uiPolicies": { "ctaBackgroundPolicy": "neutral-only" },
+  "governance": {
+    "sourceOfTruth": "Figma library with synced tokens",
+    "qaProcess": "Monthly brand reviews to check accent coverage, CTA neutrality, and contrast",
+    "changeControl": "Any new accent shades require accessibility review and documented rationale",
+    "enforcementTargets": [
+      "dashboard",
+      "fanFacing",
+      "Saas/Clients"
+    ],
+    "noDarkPatterns": true
+  },
+  "assets": {
+  "policy": {
+    "preferThese": true,
+    "notes": "Use these URLs instead of placeholders or stock."
+  },
+  "images": [
+    { "name": "Logo — White", "kind": "logo", "url": "https://stadli-brand-identity.pages.dev/logo-white.svg" },
+    { "name": "Logo — Black", "kind": "logo", "url": "https://stadli-brand-identity.pages.dev/logo-black.svg" },
+    { "name": "Horizontal photo of Toronto Rogers Stadium", "kind": "photography", "url": "https://stadli-brand-identity.pages.dev/imgs/photo-01.jpg" },
+    { "name": "Player celebration with confetti in the sky", "kind": "photography", "url": "https://stadli-brand-identity.pages.dev/imgs/photo-02.jpg" },
+    { "name": "Young woman looking at the sky in a stadium at night", "kind": "portrait photography", "url": "https://stadli-brand-identity.pages.dev/imgs/jane-doe.jpg" },
+    { "name": "Kid watching Fireworks at night", "kind": "photography", "url": "https://stadli-brand-identity.pages.dev/imgs/photo-08.jpg" },
+    { "name": "Football player heartfelt moment with kid.", "kind": "photography", "url": "https://stadli-brand-identity.pages.dev/imgs/photo-09.jpg" }
+  ],
+  "templates": []
+}
+}
