@@ -71,7 +71,7 @@ export default {
             const cookie = await createSessionCookie(row.id, env.SESSION_SECRET, 12);
             return new Response(null, {
               status: 302,
-              headers: { location: "/admin", "set-cookie": cookie, ...secHeaders() }
+              headers: { location: "/home", "set-cookie": cookie, ...secHeaders() }
             });
           } catch {
             return redirect("/login", "Auth unavailable. Run D1 migrations.");
@@ -86,20 +86,64 @@ export default {
         });
       }
 
-      // Admin (protected)
-      if (url.pathname === "/admin" && request.method === "GET") return await AdminRoutes.dashboard(env, user);
-      if (url.pathname === "/admin/fans" && request.method === "GET") return await AdminRoutes.fansList(env, user);
-      if (url.pathname === "/admin/fans" && request.method === "POST") return await AdminRoutes.fansCreate(env, user, request);
-      if (url.pathname === "/admin/content" && request.method === "GET") return await AdminRoutes.contentList(env, user);
-      if (url.pathname === "/admin/content" && request.method === "POST") return await AdminRoutes.contentCreate(env, user, request);
-      if (url.pathname === "/admin/posts" && request.method === "GET") return await AdminRoutes.postsList(env, user);
-      if (url.pathname === "/admin/posts" && request.method === "POST") return await AdminRoutes.postsSave(env, user, request);
-      if (url.pathname === "/admin/sponsors" && request.method === "GET") return await AdminRoutes.sponsorsList(env, user);
-      if (url.pathname === "/admin/sponsors" && request.method === "POST") return await AdminRoutes.sponsorsSave(env, user, request);
-      if (url.pathname === "/admin/settings" && request.method === "GET") return await AdminRoutes.settings(env, user);
-      if (url.pathname === "/admin/settings" && request.method === "POST") return await AdminRoutes.settingsSave(env, user, request);
-      if (url.pathname === "/admin/media" && request.method === "GET") return await AdminRoutes.media(env, user);
-      if (url.pathname === "/admin/media" && request.method === "POST") return await AdminRoutes.mediaUpload(env, user, request);
+      // Workspace (protected)
+      if (url.pathname === "/admin" && request.method === "GET") return redirect("/home");
+      if (url.pathname === "/home" && request.method === "GET") return await AdminRoutes.home(env, user);
+      if (url.pathname === "/search" && request.method === "GET") return await AdminRoutes.search(env, user, request);
+
+      if (url.pathname === "/web" && request.method === "GET") return redirect("/web/pages");
+      if (url.pathname === "/web/pages" && request.method === "GET") return await AdminRoutes.webPages(env, user);
+      if (url.pathname === "/web/pages" && request.method === "POST") return await AdminRoutes.webPagesCreate(env, user, request);
+      if (url.pathname === "/web/blocks" && request.method === "GET") return await AdminRoutes.webBlocks(env, user);
+      if (url.pathname === "/web/blocks" && request.method === "POST") return await AdminRoutes.webBlocksSave(env, user, request);
+      if (url.pathname === "/web/offers-surfaces" && request.method === "GET") return await AdminRoutes.webOfferSurfaces(env, user);
+      if (url.pathname === "/web/sponsor-surfaces" && request.method === "GET") return await AdminRoutes.webSponsorSurfaces(env, user);
+      if (url.pathname === "/web/sponsor-surfaces" && request.method === "POST") return await AdminRoutes.webSponsorSurfacesSave(env, user, request);
+      if (url.pathname === "/web/push-entrypoints" && request.method === "GET") return await AdminRoutes.webPushEntrypoints(env, user);
+      if (url.pathname === "/web/media" && request.method === "GET") return await AdminRoutes.webMedia(env, user);
+      if (url.pathname === "/web/media" && request.method === "POST") return await AdminRoutes.webMediaUpload(env, user, request);
+
+      if (url.pathname === "/crm" && request.method === "GET") return redirect("/crm/fans");
+      if (url.pathname === "/crm/fans" && request.method === "GET") return await AdminRoutes.crmFans(env, user);
+      if (url.pathname === "/crm/fans" && request.method === "POST") return await AdminRoutes.crmFansCreate(env, user, request);
+      const fanMatch = url.pathname.match(/^\/crm\/fans\/(\d+)$/);
+      if (fanMatch && request.method === "GET") return await AdminRoutes.crmFanDetail(env, user, Number(fanMatch[1]));
+      if (url.pathname === "/crm/segments" && request.method === "GET") return await AdminRoutes.crmSegments(env, user);
+
+      if (url.pathname === "/campaigns" && request.method === "GET") return redirect("/campaigns/list");
+      if (url.pathname === "/campaigns/list" && request.method === "GET") return await AdminRoutes.campaignsList(env, user);
+      if (url.pathname === "/campaigns/calendar" && request.method === "GET") return await AdminRoutes.campaignsCalendar(env, user);
+      if (url.pathname === "/campaigns/new" && request.method === "GET") return await AdminRoutes.campaignsBuilder(env, user);
+      if (url.pathname === "/campaigns/new" && request.method === "POST") return await AdminRoutes.campaignsCreate(env, user, request);
+      if (url.pathname === "/campaigns/playbooks" && request.method === "GET") return await AdminRoutes.campaignsPlaybooks(env, user);
+      if (url.pathname === "/campaigns/recommendations" && request.method === "GET") return await AdminRoutes.campaignsRecommendations(env, user);
+      if (url.pathname === "/campaigns/automations" && request.method === "GET") return await AdminRoutes.campaignsAutomations(env, user);
+
+      if (url.pathname === "/analytics" && request.method === "GET") return redirect("/analytics/overview");
+      if (url.pathname === "/analytics/narratives" && request.method === "GET") return await AdminRoutes.analyticsNarratives(env, user);
+      if (url.pathname === "/analytics/overview" && request.method === "GET") return await AdminRoutes.analyticsOverview(env, user);
+      if (url.pathname === "/analytics/attribution" && request.method === "GET") return await AdminRoutes.analyticsAttribution(env, user);
+      if (url.pathname === "/analytics/funnel" && request.method === "GET") return await AdminRoutes.analyticsFunnel(env, user);
+      if (url.pathname === "/analytics/segments" && request.method === "GET") return await AdminRoutes.analyticsSegments(env, user);
+      if (url.pathname === "/analytics/web-tag" && request.method === "GET") return await AdminRoutes.analyticsWebTag(env, user);
+
+      if (url.pathname === "/commerce" && request.method === "GET") return redirect("/commerce/catalog/tickets");
+      if (url.pathname === "/commerce/catalog/tickets" && request.method === "GET") return await AdminRoutes.commerceCatalogTickets(env, user);
+      if (url.pathname === "/commerce/catalog/products" && request.method === "GET") return await AdminRoutes.commerceCatalogProducts(env, user);
+      if (url.pathname === "/commerce/catalog/offers" && request.method === "GET") return await AdminRoutes.commerceOffers(env, user);
+      if (url.pathname === "/commerce/orders" && request.method === "GET") return await AdminRoutes.commerceOrders(env, user);
+      if (url.pathname === "/commerce/promotions" && request.method === "GET") return await AdminRoutes.commercePromotions(env, user);
+      if (url.pathname === "/commerce/checkout" && request.method === "GET") return await AdminRoutes.commerceCheckout(env, user);
+      if (url.pathname === "/commerce/reconciliation" && request.method === "GET") return await AdminRoutes.commerceReconciliation(env, user);
+
+      if (url.pathname === "/settings" && request.method === "GET") return redirect("/settings/users");
+      if (url.pathname === "/settings/users" && request.method === "GET") return await AdminRoutes.settingsUsers(env, user);
+      if (url.pathname === "/settings/integrations" && request.method === "GET") return await AdminRoutes.settingsIntegrations(env, user);
+      if (url.pathname === "/settings/privacy" && request.method === "GET") return await AdminRoutes.settingsPrivacy(env, user);
+      if (url.pathname === "/settings/privacy" && request.method === "POST") return await AdminRoutes.settingsPrivacyToggle(env, user, request);
+      if (url.pathname === "/settings/customization" && request.method === "GET") return await AdminRoutes.settingsCustomization(env, user);
+      if (url.pathname === "/settings/customization" && request.method === "POST") return await AdminRoutes.settingsCustomizationSave(env, user, request);
+      if (url.pathname === "/settings/environments" && request.method === "GET") return await AdminRoutes.settingsEnvironments(env, user);
 
       // API scaffold
       if (url.pathname === "/api/mock-a") return await mockFeatureA(env, request);
