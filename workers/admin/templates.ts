@@ -470,7 +470,11 @@ export const AdminViews = {
         (page) => `
           <tr>
             <td><strong>${esc(page.title)}</strong><div class="section-subcopy">/${esc(page.slug)}</div></td>
-            <td>${page.published ? "<span class=\\"badge badge--success\\">Published</span>" : "<span class=\\"badge badge--warning\\">Draft</span>"}</td>
+            <td>${
+              page.published
+                ? '<span class="badge badge--success">Published</span>'
+                : '<span class="badge badge--warning">Draft</span>'
+            }</td>
             <td>${esc(page.created_at.split("T")[0])}</td>
           </tr>
         `
