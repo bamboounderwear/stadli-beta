@@ -33,3 +33,13 @@ export async function settingsMap(db: D1Database): Promise<Record<string,string>
     return {};
   }
 }
+
+export async function insertFan(
+  db: D1Database,
+  fan: { name: string; email: string; favoriteTeam?: string | null }
+): Promise<void> {
+  await db
+    .prepare(Q.insertFan)
+    .bind(fan.name, fan.email, fan.favoriteTeam ?? null)
+    .run();
+}
