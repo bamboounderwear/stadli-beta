@@ -1,5 +1,5 @@
 {
-  "name": "team-cms-crm",
+  "name": "stadli-beta",
   "main": "workers/index.ts",
   "compatibility_date": "2025-03-07",
   "compatibility_flags": [
